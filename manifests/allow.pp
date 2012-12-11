@@ -25,7 +25,7 @@ define ufw::allow($proto='tcp', $port='all', $ip='', $from='any') {
       /^any:[0-9]/ => "ufw status | grep -E \"$port/$proto +ALLOW +$from_match\"",
       default      => "ufw status | grep -E \"$ipadr $port/$proto +ALLOW +$from_match\"",
     },
-    require => Exec['ufw-default-deny'],
+    require => Exec['ufw-default-deny', 'ufw-reset'],
     before  => Exec['ufw-enable'],
   }
 }

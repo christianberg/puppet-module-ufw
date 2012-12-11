@@ -15,6 +15,10 @@ class ufw {
     unless  => 'ufw status | grep "Status: active"',
   }
 
+  exec { 'ufw-reset':
+    command => 'ufw --force reset',
+  }
+
   service { 'ufw':
     ensure    => running,
     enable    => true,
